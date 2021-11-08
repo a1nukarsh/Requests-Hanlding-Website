@@ -5,7 +5,7 @@ console.log("Hello this is post website");
 function getElementFromStr(string) {
   let div = document.createElement("div");
   div.innerHTML = string;
-  return string.firstElementChild;
+  return div.firstElementChild;
 }
 
 // Initialize parameter number
@@ -34,7 +34,7 @@ let addParams = document.getElementById("addParams");
 addParams.addEventListener("click", () => {
   let params = document.getElementById("params");
   let string = `
-    <div class="form row">
+    <div class="form row my-3">
                 <label for="inputPassword" class="col-sm-2 col-form-label">Parameter ${
                   addedParamsCount + 2
                 }</label>
@@ -57,8 +57,9 @@ addParams.addEventListener("click", () => {
                 </div>
             </div>
     `;
-    // Convert the element to DOM node
-    let paramElement = getElementFromStr(string)
-    console.log(paramElement)
+  // Convert the element to DOM node
+  let paramElement = getElementFromStr(string);
+  // console.log(paramElement);
+  params.appendChild(paramElement);
   addedParamsCount++;
 });
