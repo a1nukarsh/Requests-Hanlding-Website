@@ -92,9 +92,15 @@ submit.addEventListener("click", () => {
   if (contentType == "params") {
     data = {};
     for (i = 0; i < addedParamsCount + 1; i++) {
-      let key = document.getElementById("parameterKey" + (i + 1)).value;
-      let value = document.getElementById("parameterValue" + (i + 1)).value;
-      data[key] = value;
+      if (document.getElementById("parameterKey" + (i + 1) != undefined)) {
+        let key = document.getElementById("parameterKey" + (i + 1)).value;
+        let value = document.getElementById("parameterValue" + (i + 1)).value;
+        data[key] = value;
+      }
+      data = JSON.stringify(data)
     }
+  }
+  else{
+    data = document.getElementById('requestJsonText').value
   }
 });
