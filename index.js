@@ -39,11 +39,15 @@ addParams.addEventListener("click", () => {
         Parameter ${addedParamsCount + 2}
       </label>
       <div class="col-md-4">
-          <input type="text" class="form-control" id="parameterKey${addedParamsCount + 2}" placeholder="Enter Parameter ${addedParamsCount + 2} Key">
+          <input type="text" class="form-control" id="parameterKey${
+            addedParamsCount + 2
+          }" placeholder="Enter Parameter ${addedParamsCount + 2} Key">
           <!-- <input type="text" class="form-control" id="urlField"> -->
       </div>
       <div class="col-md-4" style="display: flex;">
-          <input type="text" class="form-control" id="parameterValue${addedParamsCount + 2}" placeholder="Enter Parameter ${addedParamsCount + 2} Value">
+          <input type="text" class="form-control" id="parameterValue${
+            addedParamsCount + 2
+          }" placeholder="Enter Parameter ${addedParamsCount + 2} Value">
             <button class="btn btn-primary remove deleteParams" style="margin-left: 8px;"> - </button>
       </div>
     </div>
@@ -56,28 +60,41 @@ addParams.addEventListener("click", () => {
   // Add an event listener to remove the parameter on clicking the - button
   let deleteParams = document.getElementsByClassName("deleteParams");
   for (item of deleteParams) {
-      item.addEventListener("click", (e) => {
-        e.target.parentElement.parentElement.remove();
-      });
+    item.addEventListener("click", (e) => {
+      e.target.parentElement.parentElement.remove();
+    });
   }
   addedParamsCount++;
 });
 
 // If the user clicks on Submit button
-let submit = document.getElementById('submit')
-submit.addEventListener('click', ()=>{
+let submit = document.getElementById("submit");
+submit.addEventListener("click", () => {
   // Show please wait in the response box
-  document.getElementById('responseText').value = "Please Wait, Fetching Response..."
+  document.getElementById("responseText").value =
+    "Please Wait, Fetching Response...";
 
   // Fetch all the values user has entered
-  let url = document.getElementById('urlField').value
-  let requestType = document.querySelector("input[name='requestType']:checked").value
-  let contentType = document.querySelector("input[name='contentType']:checked").value
+  let url = document.getElementById("urlField").value;
+  let requestType = document.querySelector(
+    "input[name='requestType']:checked"
+  ).value;
+  let contentType = document.querySelector(
+    "input[name='contentType']:checked"
+  ).value;
 
   // Logging the values in console
-  console.log('Url = ', url)
-  console.log('rType = ', requestType)
-  console.log('ctype = ', contentType)
+  console.log("Url = ", url);
+  console.log("rType = ", requestType);
+  console.log("ctype = ", contentType);
 
-  // if user selects 
-})
+  // if user selects params option insead of JSON, collect all the parameters in an object
+  if (contentType == "params") {
+    data = {};
+    for (i = 0; i < addedParamsCount + 1; i++) {
+      let key = document.getElementById("parameterKey" + (i + 1)).value;
+      let value = document.getElementById("parameterValue" + (i + 1)).value;
+      data[key] = value;
+    }
+  }
+});
