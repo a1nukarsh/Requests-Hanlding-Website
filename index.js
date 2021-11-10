@@ -86,7 +86,7 @@ submit.addEventListener("click", () => {
   // if user selects params option insead of JSON, collect all the parameters in an object
   if (contentType == "params") {
     data = {};
-    for (i = 0; i < addedParamsCount + 1; i++) {
+    for (let i = 0; i < addedParamsCount + 1; i++) {
       if (document.getElementById("parameterKey" + (i + 1)) != undefined){
         let key = document.getElementById("parameterKey" + (i + 1)).value;
         let value = document.getElementById("parameterValue" + (i + 1)).value;
@@ -102,4 +102,28 @@ submit.addEventListener("click", () => {
   console.log("rType = ", requestType);
   console.log("ctype = ", contentType);
   console.log("data = ", data);
+
+// if the req type is post, invoke fetch api to create post request
+  if (requestType=='GET'){
+    fetch(url, {
+      method: 'GET',
+    })
+    .then(response=>response.text())
+    .then((text) =>{
+      document.getElementById("responseText").value = text
+    })
+  }
+  else{
+    fetch(url, {
+      method: 'POST',
+      body: data,
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      }
+    })
+    .then(response=>response.text())
+    .then((text) =>{
+      document.getElementById("responseText").value = text
+    })
+  }
 });
