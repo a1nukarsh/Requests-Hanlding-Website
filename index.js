@@ -83,24 +83,23 @@ submit.addEventListener("click", () => {
     "input[name='contentType']:checked"
   ).value;
 
-  // Logging the values in console
-  console.log("Url = ", url);
-  console.log("rType = ", requestType);
-  console.log("ctype = ", contentType);
-
   // if user selects params option insead of JSON, collect all the parameters in an object
   if (contentType == "params") {
     data = {};
     for (i = 0; i < addedParamsCount + 1; i++) {
-      if (document.getElementById("parameterKey" + (i + 1) != undefined)) {
+      if (document.getElementById("parameterKey" + (i + 1)) != undefined){
         let key = document.getElementById("parameterKey" + (i + 1)).value;
         let value = document.getElementById("parameterValue" + (i + 1)).value;
         data[key] = value;
       }
-      data = JSON.stringify(data)
+      data = JSON.stringify(data); //Data is a json string
     }
+  } else {
+    data = document.getElementById("requestJsonText").value;
   }
-  else{
-    data = document.getElementById('requestJsonText').value
-  }
+  // Logging the values in console
+  console.log("Url = ", url);
+  console.log("rType = ", requestType);
+  console.log("ctype = ", contentType);
+  console.log("data = ", data);
 });
